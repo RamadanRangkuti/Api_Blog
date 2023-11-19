@@ -10,17 +10,6 @@ const userController = {
       res.json({ status: 500, messsage: 'Internal server error' });
     }
   },
-  getByEmail: (email) => {
-    return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM users WHERE email = $1', [email], (err, result) => {
-        if (err) {
-          reject(err.message);
-        } else {
-          resolve(result.rows[0]);
-        }
-      });
-    });
-  },
 };
 
 module.exports = userController;
