@@ -12,6 +12,20 @@ const commentModel = {
       });
     });
   },
+  getContentComment: () => {
+    return new Promise((resolve, reject) => {
+      db.query(`SELECT contents.title, contents.article, users.username, comments.comment
+      FROM contents
+      LEFT JOIN comments ON contents.id = comments.postid
+      LEFT JOIN users ON comments.userid = users.id`, (err, result) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve(result.rows);
+        }
+      });
+    });
+  },
   getDetail: ({ id }) => {
     return new Promise((resolve, reject) => {
       // prepare statement
@@ -58,6 +72,17 @@ const commentModel = {
       });
     });
   },
+  // getByContentId: (contentId) => {
+  //   return new Promise((resolve, reject) => {
+  //     db.query('SELECT * FROM comments WHERE postid=$1', [contentId], (err, result) => {
+  //       if (err) {
+  //         reject(err.message);
+  //       } else {
+  //         resolve(result.rows);
+  //       }
+  //     });
+  //   });
+  // },
 };
 
 module.exports = commentModel;

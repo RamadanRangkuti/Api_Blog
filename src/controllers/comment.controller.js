@@ -11,6 +11,14 @@ const commentController = {
       return response(res, 500, error.message);
     }
   },
+  getContentComment: async (req, res) => {
+    try {
+      const result = await commentModel.getContentComment();
+      return response(res, 200, result);
+    } catch (error) {
+      return response(res, 500, error.message);
+    }
+  },
   getDetail: async (req, res) => {
     try {
       const payload = { id: req.params.id };
@@ -68,6 +76,15 @@ const commentController = {
       return response(res, 500);
     }
   },
+  // getByContentId: async (req, res) => {
+  //   try {
+  //     const { contentId } = req.params;
+  //     const comments = await commentModel.getByContentId(contentId);
+  //     return response(res, 200, comments);
+  //   } catch (error) {
+  //     return response(res, 500, error.message);
+  //   }
+  // },
 };
 
 module.exports = commentController;
