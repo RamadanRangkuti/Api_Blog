@@ -1,13 +1,13 @@
 const userModel = require('../models/user.model');
-// const response = require('../../helpers/formResponse');
+const response = require('../../helpers/formResponse');
 
 const userController = {
   get: async (req, res) => {
     try {
       const result = await userModel.get();
-      res.json({ status: 200, messsage: 'success', data: result });
+      return response(res, 200, result);
     } catch (error) {
-      res.json({ status: 500, messsage: 'Internal server error' });
+      return response(res, 500, error.message);
     }
   },
 };
